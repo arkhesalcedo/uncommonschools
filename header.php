@@ -11,7 +11,7 @@
   	<body>
   		<div id="app">
   			<ucs-nav 
-  				mobile-logo="<?php echo get_template_directory_uri(); ?>/assets/images/logo-mobile.png" 
+  				mobile-logo="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" 
   				logo="<?php echo get_template_directory_uri(); ?>/assets/images/logo.jpg" 
   				alt="Uncommon Schools"
   			></ucs-nav>

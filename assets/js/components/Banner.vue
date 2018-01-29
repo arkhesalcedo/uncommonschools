@@ -1,14 +1,16 @@
 <template>
 	<transition name="slide-fade">
-		<section id="us-banner" v-if="loaded">
+		<section id="us-banner">
 			<div class="row" :style="{ 'background-image': 'url(' + image + ')' }">
 				<div class="section">
 					<div class="container">
-						<div class="columns">
-							<div class="column is-half">
+						<div class="columns bannerContainer">
+							<div class="column is-half halfBanner">
 								<p>{{ subtitle }}</p>
 								<h1>{{ title }}</h1>
-								<a :href="link"><img :src="readMoreImage" alt="Read More"></a>
+
+								<a :href="link" class="customButton">Read More <img :src="readMoreImage" alt="Read More"></a>
+</a>
 							</div>
 						</div>
 					</div>
@@ -20,12 +22,22 @@
 
 <style lang="scss" scoped>
 	#us-banner {
+		.bannerContainer {
+			max-width: 1060px;
+			margin: 0 auto;
+		}
+
 		.row {
 			height: 100vh;
+			min-height: 600px;
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-attachment: fixed;
 			background-position: center center;
+
+			@media only screen and (max-width : 768px) {
+				background-attachment: none;
+			}
 
 			.container {
 				height: 100vh;
@@ -33,7 +45,9 @@
     			align-items: center;
 
     			.halfBanner {
-    				width: 50%;
+    				@media only screen and (max-width : 1215px) {
+						width: 100%;
+					}
     			}
 
     			p {
@@ -83,8 +97,6 @@
 			axios.get('/wp-json/acf/v3/pages/' + this.page).then((response) => {
 		  		let data = response.data;
 
-		  		this.loaded = true;
-
 		  		this.subtitle = data.acf.banner_subtitle;
 
 		  		this.title = data.acf.banner_title;
@@ -93,6 +105,7 @@
 
 		  		this.image = data.acf.banner_image;
 
+		  		this.loaded = true;
 		  	}).catch((error) => {
 				console.log(error);
 		  	});

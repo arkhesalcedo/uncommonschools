@@ -1,8 +1,8 @@
 <template>
-	<section id="ucs-footer" :style="{ 'background-image': 'url(' + image + ')' }">
+	<section id="ucs-footer" :style="{ 'background-image': 'url(' + image + ')' }" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 		<div class="section">
 			<div class="container">
-				<div class="columns">
+				<div class="columns footerContainer">
 					<div class="column">
 						<h4>Find a school near you</h4>
 
@@ -17,7 +17,7 @@
 
 		<div id="newsletter" class="section">
 			<div class="container">
-				<div class="columns">
+				<div class="columns footerContainer">
 					<div class="column">
 						<h5>Newsletter</h5>
 					</div>
@@ -36,7 +36,7 @@
 
 		<div class="section" id="footerNav">
 			<div class="container">
-				<div class="columns">
+				<div class="columns footerContainer">
 					<div class="column is-offset-3">
 						<nav>
 							<ul>
@@ -77,6 +77,11 @@
 
 <style lang="scss" scoped>
 	#ucs-footer {
+		.footerContainer {
+			max-width: 1060px;
+			margin: 0 auto;
+		}
+
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: top left;
@@ -84,6 +89,10 @@
 
 		padding-top: 50px;
 		padding-bottom: 50px;
+
+		@media only screen and (max-width : 768px) {
+			padding-bottom: 0px;
+		}
 
 		h4 {
 			font-family: 'KnockoutFull';
@@ -127,6 +136,11 @@
 				top: 50%;
 				transform: translateY(-50%);
 				cursor: pointer;
+				transition: right 0.3s;
+
+				&:hover {
+					right: 14px;
+				}
 			}
 		}
 
@@ -171,6 +185,12 @@
 				background: none;
 				cursor: pointer;
 				height: 51px;
+				margin-left: 0px;
+				transition: margin-left 0.3s;
+
+				&:hover {
+					margin-left: 10px;
+				}
 			}
 		}
 
@@ -240,6 +260,8 @@
 			}
 
 			#footerNav {
+				background: rgba(0, 0, 0, 0.5);
+				
 				nav {
 					ul {
 						li {

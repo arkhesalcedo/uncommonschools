@@ -1,11 +1,11 @@
 <template>
 	<transition name="slide-fade">
-		<section id="ucs-social" class="section" v-if="loaded">
+		<section id="ucs-social" class="section" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 			<div class="container">
 				<div class="columns">
 					<div class="column">
-						<p>{{ subtitle }}</p>
-						<h2>{{ title }}</h2>
+						<p class="has-text-centered">{{ subtitle }}</p>
+						<h2 class="has-text-centered">{{ title }}</h2>
 					</div>
 				</div>
 
@@ -30,7 +30,8 @@
 
 				<div class="columns">
 					<div class="column has-text-centered">
-						<a href="" class="loadMore"><img :src="loadMoreImage"></a>
+						<a href="" class="customButton">Load More <img :src="loadMoreImage" alt="Load More"></a>
+</a>
 					</div>
 				</div>
 			</div>
@@ -41,10 +42,16 @@
 <style lang="scss" scoped>
 	#ucs-social {
 		background: linear-gradient(to bottom, #FFF 0%, #FFF 65%, #E6EDEE 65%, #E6EDEE 100%);
+		padding-top: 300px;
 
-		.loadMore {
+		.customButton {
 			margin: 100px auto;
 			display: inline-block;
+			color: #000;
+
+			@media only screen and (max-width : 768px) {
+				margin: 40px auto 0px;
+			}
 		}
 
 		.columns {
@@ -66,11 +73,17 @@
 					font-family: 'KnockoutFull';
 					letter-spacing: 1px;
 					margin-bottom: 60px;
+
+					@media only screen and (max-width : 768px) {
+						font-size: 60px;
+						line-height: 100%;
+						margin-bottom: 0px;
+					}
 				}
 			}
 
 			&.socialFeeds {
-				max-width: 973px;
+				max-width: 1060px;
 				margin: 0 auto;
 
 				.column {
@@ -126,15 +139,15 @@
 									opacity: 0;
 
 									&.commentsCount {
-										transition: opacity 0.3s ease-out 0.3s;
+										transition: opacity 0.3s ease-out 0.2s;
 									}
 
 									&.sharesCount {
-										transition: opacity 0.3s ease-out 0.4s;
+										transition: opacity 0.3s ease-out 0.3s;
 									}
 
 									&.lovesCount {
-										transition: opacity 0.3s ease-out 0.5s;
+										transition: opacity 0.3s ease-out 0.4s;
 									}
 								}
 							}
@@ -156,6 +169,7 @@
 						img {
 							transform: none;
 							box-shadow: none;
+							width:  100%;
 							transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 						}
 
@@ -163,6 +177,10 @@
 							img {
 								transform: scale(1.1);
 								box-shadow: 4px 6px 6px 0 rgba(0,0,0,0.50), inset 0 1px 3px 0 rgba(0,0,0,0.50);
+
+								@media only screen and (max-width : 768px) {
+									transform: scale(1.05);
+								}
 							}
 
 							.socialFeedsContent {
@@ -262,12 +280,11 @@
 			axios.get('/wp-json/acf/v3/pages/' + this.page).then((response) => {
 		  		let data = response.data;
 
-		  		this.loaded = true;
-
 		  		this.subtitle = data.acf.social_subtitle;
 
 		  		this.title = data.acf.social_title;
 
+		  		this.loaded = true;
 		  	}).catch((error) => {
 				console.log(error);
 		  	});

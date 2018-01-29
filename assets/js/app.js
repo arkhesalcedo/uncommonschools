@@ -2,6 +2,10 @@ import Vue from 'vue';
 
 import Axios from 'axios';
 
+import VueScrollReveal from 'vue-scroll-reveal';
+ 
+Vue.use(VueScrollReveal);
+
 window.Vue = Vue;
 
 window.axios = Axios;
@@ -19,6 +23,12 @@ Vue.component('ucs-cta', require('./components/CTA.vue'));
 Vue.component('ucs-social', require('./components/Social.vue'));
 
 Vue.component('ucs-steps', require('./components/Steps.vue'));
+
+Vue.component('ucs-profiles', require('./components/Profiles.vue'));
+
+Vue.component('ucs-justice', require('./components/Justice.vue'));
+
+Vue.component('ucs-video', require('./components/Video.vue'));
 
 let app = new Vue({
 	el: '#app'

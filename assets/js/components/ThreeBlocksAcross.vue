@@ -1,15 +1,15 @@
 <template>
 	<transition name="slide-fade">
-		<section id="ucs-3-blocks-across" class="section"  v-if="loaded">
+		<section id="ucs-3-blocks-across" class="section" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 			<div class="container">
 				<div class="columns">
 					<div class="column">
-						<p>{{ subtitle }}</p>
-						<h2>{{ title }}</h2>
+						<p class="has-text-centered">{{ subtitle }}</p>
+						<h2 class="has-text-centered">{{ title }}</h2>
 					</div>
 				</div>
 
-				<div class="columns">
+				<div class="columns acrossBlocksContainer">
 					<div class="column" v-for="(service, index) in services">
 						<div class="acrossContainer">
 							<img :src="service.acf.image" :alt="service.acf.title">
@@ -49,6 +49,7 @@
 			@media only screen and (max-width : 768px) {
 				font-size: 60px;
 				line-height: 100%;
+				margin-bottom: 0px;
 			}
 		}
 
@@ -58,12 +59,13 @@
 			position: relative;
 			bottom: 0px;
 			transition: box-shadow 0.5s ease-out, bottom 0.3s;
+			width: 100%;
 		}
 
 		.details {
 			position: absolute;
 			width: 100%;
-			border-top: 1px solid #FFDD00;
+			border-top: 3px solid #FFDD00;
 			background: rgba(51, 55, 67, 0.75);
 			color: #FFF;
 			padding: 22px;
@@ -71,7 +73,12 @@
 			overflow: hidden;
 			bottom: 23px;
     		right: -17px;
-    		transition: height 0.3s;
+    		transition: height 0.3s, bottom 0.3s;
+
+    		@media only screen and (max-width : 768px) {
+				bottom: 6px;
+    			right: 0px;
+			}
 
 			h4 {
 				font-family: 'KnockoutFull';
@@ -89,12 +96,25 @@
 				font-family: 'ITC Franklin Gothic MdCd';
 				transition: opacity 0.3s ease;
 			}
+
+			a {
+				position: absolute;
+				bottom: 20px;
+				right: 20px;
+						
+				img {
+					width: auto;
+				}
+			}
+		}
+
+		.acrossBlocksContainer {
+			max-width: 1060px;
+			margin: 0 auto;
 		}
 
 		.acrossContainer {
 			position: relative;
-			width: 320px;
-			margin: 0 auto;
 
 			&:hover {
 				.details {
@@ -108,13 +128,14 @@
 					a {
 						opacity: 1;
 						transition-delay: 0.3s;
-						position: absolute;
-						bottom: 20px;
-						right: 20px;
 					}
 
 					img {
 						box-shadow: none;
+					}
+
+					@media only screen and (max-width : 768px) {
+						bottom: 11px;
 					}
 				}
 
@@ -153,17 +174,14 @@
 			axios.get('/wp-json/acf/v3/pages/' + this.page).then((response) => {
 		  		let data = response.data;
 
-		  		this.loaded = true;
-
 		  		this.subtitle = data.acf.subtitle;
 
 		  		this.title = data.acf.title;
-
 		  	}).catch((error) => {
 				console.log(error);
 		  	});
 
-		  	axios.get('/wp-json/acf/v3/ucs-services?per_page=3').then((response) => {
+		  	axios.get('/wp-json/acf/v3/ucs-services?per_page=3&order=asc').then((response) => {
 		  		this.services = response.data;
 
 		  		this.loaded = true;

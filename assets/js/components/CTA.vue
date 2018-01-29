@@ -1,15 +1,16 @@
 <template>
 	<transition name="slide-fade">
-		<section id="ucs-cta" class="section"  v-if="loaded">
+		<section id="ucs-cta" class="section" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 			<div class="container">
-				<div class="columns">
+				<div class="columns ctaContainer">
 					<div class="column">
 						<img :src="banner" class="ctaBanner">
 
 						<div class="cta">
 							<h4>{{ title }}</h4>
 
-							<a href=""><img :src="learnMoreImage"></a>
+							<a href="" class="customButton">Learn More <img :src="learnMoreImage" alt="Learn More"></a>
+</a>
 						</div>
 					</div>
 				</div>
@@ -20,6 +21,11 @@
 
 <style lang="scss" scoped>
 	#ucs-cta {
+		.ctaContainer {
+			max-width: 1060px;
+			margin: 0 auto;
+		}
+
 		&.section {
 			padding: 15rem 1.5rem;
 		}
@@ -98,11 +104,10 @@
 
 		  		this.link = data.acf.cta_link;
 
+		  		this.loaded = true;
 		  	}).catch((error) => {
 				console.log(error);
 		  	});
-
-			this.loaded = true;
 		}
 	}
 </script>
