@@ -1,7 +1,7 @@
 <template>
 	<transition name="slide-fade">
-		<section id="ucs-justice" class="section" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
-			<div class="container">
+		<section id="ucs-justice" class="section">
+			<div class="container" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 				<div class="columns justiceContainer">
 					<div class="column">
 						<transition name="custom-fade" mode="out-in" appear>

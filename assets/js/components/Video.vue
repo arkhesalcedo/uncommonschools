@@ -1,7 +1,7 @@
 <template>
 	<transition name="slide-fade">
-		<section id="ucs-video" class="section" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
-			<div class="container">
+		<section id="ucs-video" class="section">
+			<div class="container" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 				<div class="columns videoContainer">
 					<div class="column">
 						<transition name="custom-fade" mode="out-in" appear>
@@ -33,15 +33,17 @@
 				</div>
 			</div>
 
-			<div class="modal" :class="{ 'is-active' : selectedVideo }" v-if="selectedVideo">
-				<div class="modal-background"></div>
-			  	
-			  	<div class="modal-content">
-			    	<iframe width="100%" height="100%" :src="['https://youtube.com/embed/' + selectedVideo]" allowfullscreen></iframe>
-			  	</div>
-			  	
-			  	<button class="modal-close is-large" aria-label="close" @click="selectedVideo = false"></button>
-			</div>
+			<transition name="fade">
+				<div class="modal" :class="{ 'is-active' : selectedVideo }" v-if="selectedVideo">
+					<div class="modal-background"></div>
+				  	
+				  	<div class="modal-content">
+				    	<iframe width="100%" height="100%" :src="['https://youtube.com/embed/' + selectedVideo]" allowfullscreen></iframe>
+				  	</div>
+				  	
+				  	<button class="modal-close is-large" aria-label="close" @click="selectedVideo = false"></button>
+				</div>
+			</transition>	
 		</section>
 	</transition>
 </template>

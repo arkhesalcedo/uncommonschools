@@ -1,8 +1,8 @@
 <template>
 	<transition name="slide-fade">
-		<div id="ucs-profiles" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
+		<div id="ucs-profiles">
 			<section class="section">
-				<div class="container">
+				<div class="container" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 					<div class="columns profileContainer">
 						<div class="column is-5">
 							<p class="caption">{{ subtitle }}</p>
@@ -28,28 +28,31 @@
 				</div>
 			</section>
 
-			<div class="modal" :class="{ 'is-active' : isActive }" v-if="selectedProfile">
-				<div class="modal-background"></div>
-			  	
-			  	<div class="modal-content">
-			    	<div class="section">
-			    		<div class="columns">
-			    			<div class="column">
-			    				<figure class="image is-square">
-									<img :src="selectedProfile.acf.picture">
-								</figure>
-			    			</div>
-			    			<div class="column">
-			    				<span>{{ selectedProfile.acf.school_name }}</span>
-								<h4>{{ selectedProfile.acf.first_name }} {{ selectedProfile.acf.last_name }}</h4>
-								<p>{{ selectedProfile.acf.profile }}</p>
-			    			</div>
-			    		</div>
-			    	</div>
-			  	</div>
-			  	
-			  	<button class="modal-close is-large" aria-label="close" @click="isActive = false"></button>
-			</div>
+			<transition name="fade">
+				<div class="modal" :class="{ 'is-active' : isActive }" v-if="selectedProfile">
+					<div class="modal-background"></div>
+				  	
+				  	<div class="modal-content">
+				    	<div class="section">
+				    		<div class="columns">
+				    			<div class="column">
+				    				<figure class="image is-square">
+										<img :src="selectedProfile.acf.picture">
+									</figure>
+				    			</div>
+				    			<div class="column">
+				    				<span>{{ selectedProfile.acf.school_name }}</span>
+									<h4>{{ selectedProfile.acf.first_name }} {{ selectedProfile.acf.last_name }}</h4>
+									<p>{{ selectedProfile.acf.profile }}</p>
+
+									<a href="" class="customButton" @click.prevent="isActive = false">Close</a>
+
+				    			</div>
+				    		</div>
+				    	</div>
+				  	</div>
+				</div>
+			</transition>
 		</div>
 	</transition>
 </template>
@@ -68,6 +71,10 @@
 		.modal {
 			.modal-content {
 				width: 1060px;
+			}
+
+			.customButton {
+				margin-top: 20px;
 			}
 
 			span {

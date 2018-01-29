@@ -1,7 +1,7 @@
 <template>
 	<transition name="slide-fade">
-		<section id="ucs-cta" class="section" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
-			<div class="container">
+		<section id="ucs-cta" class="section">
+			<div class="container" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 				<div class="columns ctaContainer">
 					<div class="column">
 						<img :src="banner" class="ctaBanner">

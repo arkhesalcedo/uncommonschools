@@ -1,7 +1,7 @@
 <template>
 	<transition name="slide-fade">
-		<section id="ucs-social" class="section" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
-			<div class="container">
+		<section id="ucs-social" class="section">
+			<div class="container" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 				<div class="columns">
 					<div class="column">
 						<p class="has-text-centered">{{ subtitle }}</p>

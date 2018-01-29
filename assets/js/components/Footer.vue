@@ -1,7 +1,7 @@
 <template>
-	<section id="ucs-footer" :style="{ 'background-image': 'url(' + image + ')' }" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
+	<section id="ucs-footer" :style="{ 'background-image': 'url(' + image + ')' }">
 		<div class="section">
-			<div class="container">
+			<div class="container" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 				<div class="columns footerContainer">
 					<div class="column">
 						<h4>Find a school near you</h4>

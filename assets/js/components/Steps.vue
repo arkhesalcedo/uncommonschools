@@ -1,7 +1,7 @@
 <template>
 	<transition name="slide-fade">
-		<div id="ucs-steps" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
-			<section class="section topSteps">
+		<div id="ucs-steps">
+			<section class="section topSteps" v-scroll-reveal="{ delay: 250, viewFactor: 0.2 }">
 				<div class="container">
 					<div class="columns">
 						<div class="column">
